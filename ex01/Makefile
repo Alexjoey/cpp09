@@ -14,14 +14,14 @@ SRC_DIR	= ./src
 INC_DIR	= ./inc
 OBJ_DIR	= ./obj
 
-SRCS	= ./main.cpp
+SRCS	= ./main.cpp ./RPN.cpp
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 CC		= c++
 CFLAGS	= -Wextra -Wall -Werror -std=c++98
 INCLUDE	= -I.
 RM		= rm -rf
 
-NAME	= easyfind
+NAME	= RPN
 
 #---------------------------Messages--------------------------------------------
 
