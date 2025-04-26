@@ -69,7 +69,7 @@ void	RPN::doSubtraction()
 		throw std::exception();
 	int b = _nums.top();
 	_nums.pop();
-	_nums.push(a - b);
+	_nums.push(b - a);
 }
 
 void RPN::doMulitplication()
