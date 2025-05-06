@@ -22,4 +22,5 @@ int	main(int argc, char **argv)
 		vec.push_back(atoi(argv[i]));
 	}
 	PmergeMe::sort(vec);
+	printVector(vec);
 }

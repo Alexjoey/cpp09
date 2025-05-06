@@ -35,7 +35,10 @@ private:
 	static void	sortPairs(listPair &pairs);
 
 	static void	mergeSortPairs(vecPairIter begin, vecPairIter end, std::size_t size);
-	static void	mergeSortPairs(listPairIter begin, listPairIter end, std::size_t size);
+	static void	mergeSortPairs(listPair &list, std::size_t size);
 
 	static void insertIntoMainChain(vecPair &pairs, std::vector<int> &main_chain, bool isOdd, int additional_value);
 };
+
+void printVector(const std::vector<int> &vec);
+void printList(const std::list<int> &list);

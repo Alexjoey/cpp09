@@ -31,10 +31,34 @@ void printVector(const std::vector<int> &vec)
 	std::cout << std::endl;
 }
 
+void printList(const std::list<int> &list)
+{
+	for (std::list<int>::const_iterator it = list.begin(); it != list.end(); it++)
+	{
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+}
+
+void printPairs(const std::vector<std::pair<int, int> > &vec)
+{
+	for (std::vector<std::pair<int, int> >::const_iterator it = vec.begin(); it != vec.end(); ++it)
+	{
+		std::cout << "(" << it->first << ", " << it->second << ") ";
+	}
+	std::cout << std::endl;
+}
+
 void	binaryInsertion(std::vector<int> &vec, std::vector<int>::iterator end, int value)
 {
 	std::vector<int>::iterator it = std::lower_bound(vec.begin(), end, value);
 	vec.insert(it, value);
+}
+
+void	binaryInsertion(std::list<int> &list, std::list<int>::iterator end, int value)
+{
+	std::list<int>::iterator it = std::lower_bound(list.begin(), end, value);
+	list.insert(it, value);
 }
 
 void	PmergeMe::insertIntoMainChain(vecPair &pairs, std::vector<int> &main_chain, bool isOdd, int additional_value)
@@ -94,22 +118,19 @@ void	PmergeMe::sort(std::vector<int> &vec)
 		vec.pop_back();
 	}
 
-	//
-	std::vector<std::pair<int, int> > pairs;
-	pairs.resize(vec.size() / 2);
+	std::vector<std::pair<int, int> > pairs(vec.size() / 2);
 	for (std::size_t i = 0; i < vec.size(); i += 2)
 		pairs[i / 2] = (std::pair<int, int> (vec[i], vec[i + 1]));
 	sortPairs(pairs);
 	mergeSortPairs(pairs.begin(), pairs.end(), pairs.size());
 
 	//init main chain
-	std::vector<int> main_chain(vec.size() / 2);
+	std::vector<int> mainChain(vec.size() / 2);
 	for (std::size_t i = 0; i < pairs.size(); i++)
-		main_chain[i] = (pairs[i].second);
-	main_chain.insert(main_chain.begin(), pairs[0].first);
-
-	insertIntoMainChain(pairs, main_chain, isOdd, oddValue);
-	vec = main_chain;
+		mainChain[i] = pairs[i].second;
+	mainChain.insert(mainChain.begin(), pairs[0].first);
+	insertIntoMainChain(pairs, mainChain, isOdd, oddValue);
+	vec = mainChain;
 }
 
 void	PmergeMe::sort(std::list<int> &list)
@@ -137,26 +158,42 @@ void	PmergeMe::mergeSortPairs(vecPairIter begin, vecPairIter end, std::size_t si
 		size = std::distance(begin, end);
 	if (size < 2)
 		return ;
+
 	std::size_t sizeFirstHalf = size / 2;
 	std::size_t sizeSecHalf = size - sizeFirstHalf;
 	vecPairIter center = begin;
 	std::advance(center, sizeFirstHalf);
+
+	// Recursively sort both halves
 	mergeSortPairs(begin, center, sizeFirstHalf);
 	mergeSortPairs(center, end, sizeSecHalf);
+
+	// Merge the sorted halves back into lst
 	std::inplace_merge(begin, center, end, &comparePairs);
 }
 
-void	PmergeMe::mergeSortPairs(listPairIter begin, listPairIter end, std::size_t size)
+void PmergeMe::mergeSortPairs(listPair& lst, std::size_t size)
 {
-	if (size == 0 && begin != end)
-		size = std::distance(begin, end);
+	if (size == 0 && !lst.empty())
+		size = lst.size();
 	if (size < 2)
 		return ;
+
 	std::size_t sizeFirstHalf = size / 2;
 	std::size_t sizeSecHalf = size - sizeFirstHalf;
-	listPairIter center = begin;
-	std::advance(center, sizeFirstHalf);
-	mergeSortPairs(begin, center, sizeFirstHalf);
-	mergeSortPairs(center, end, sizeSecHalf);
-	std::inplace_merge(begin, center, end, &comparePairs);
+
+	listPair left, right;
+	listPairIter mid = lst.begin();
+	std::advance(mid, lst.size() / 2);
+
+	left.splice(left.begin(), lst, lst.begin(), mid);
+	right.splice(right.begin(), lst, lst.begin(), lst.end());
+
+	// Recursively sort both halves
+	mergeSortPairs(left, sizeFirstHalf);
+	mergeSortPairs(right, sizeSecHalf);
+
+	// Merge the sorted halves back into lst
+	left.merge(right, &comparePairs);
+	lst.swap(left);
 }
