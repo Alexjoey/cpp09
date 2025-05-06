@@ -38,6 +38,7 @@ private:
 	static void	mergeSortPairs(listPair &list, std::size_t size);
 
 	static void insertIntoMainChain(vecPair &pairs, std::vector<int> &main_chain, bool isOdd, int additional_value);
+	static void	insertIntoMainChain(listPair &pairs, std::list<int> &main_chain, bool isOdd, int additional_value);
 };
 
 void printVector(const std::vector<int> &vec);

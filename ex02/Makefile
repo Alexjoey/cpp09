@@ -43,6 +43,10 @@ $(NAME):	$(OBJS)
 				@echo Compiling $(NAME)
 				$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) -o $(NAME)
 
+SIZE ?= 20
+
+test:	$(NAME)
+	./$(NAME) $$(shuf -i 0-$(SIZE) -n $(SIZE))
 re:			fclean all
 
 clean:	
