@@ -21,6 +21,15 @@ int	main(int argc, char **argv)
 	(void) argc;
 	std::vector<int> vec;
 	for (std::size_t i = 1; argv[i]; i++)
+	{
+		if (atoi(argv[i]) < 0)
+		{
+			std::cout << "Pogram does not take in negative numbers\n";
+			return (1);
+		}
+	}
+
+	for (std::size_t i = 1; argv[i]; i++)
 		vec.push_back(atoi(argv[i]));
 	clock_t startVec = clock();
 	PmergeMe::sort(vec);
