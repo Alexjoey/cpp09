@@ -6,7 +6,7 @@
 /*   By: amylle <alexm@live.be>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 22:16:43 by amylle            #+#    #+#             */
-/*   Updated: 2025/05/05 22:19:47 by amylle           ###   ########.fr       */
+/*   Updated: 2025/06/18 15:22:05 by amylle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,13 @@ int	main(int argc, char **argv)
 	double vecTime = static_cast<double>(endVec - startVec) * 1000.0 / CLOCKS_PER_SEC;
 	double listTime = static_cast<double>(endList - startList) * 1000.0 / CLOCKS_PER_SEC;
 
-	std::cout << "Before: ";
+	std::cout << "Before: \n";
 	for (size_t i = 1; argv[i]; i++)
 		std::cout << argv[i] << " ";
 	std::cout << std::endl;
-	std::cout << "After: ";
+	std::cout << "After: \n";
 	printVector(vec);
+	printList(list);
 	std::cout << std::fixed << std::setprecision(3) << "Time to process a range of " << vec.size() << " elements with std::vector: " << vecTime << " ms\n";
 	std::cout << std::fixed << std::setprecision(3) << "Time to process a range of " << list.size() << " elements with std::list: " << listTime << " ms\n";
 }

@@ -6,13 +6,12 @@
 /*   By: amylle <alexm@live.be>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 21:24:54 by amylle            #+#    #+#             */
-/*   Updated: 2025/05/05 22:21:15 by amylle           ###   ########.fr       */
+/*   Updated: 2025/06/18 15:20:15 by amylle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 #include <algorithm>
-#include <functional>
 #include <iostream>
 
 bool	PmergeMe::comparePairs(std::pair<int, int> a, std::pair<int, int> b)
