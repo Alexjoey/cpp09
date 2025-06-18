@@ -6,16 +6,11 @@
 /*   By: amylle <alexm@live.be>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 17:23:16 by amylle            #+#    #+#             */
-/*   Updated: 2025/04/25 19:06:31 by amylle           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:55:24 by amylle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-#include <iomanip>
-#include <locale>
-#include <stdexcept>
-#include <string>
-#include <sstream>
 
 BitCoinExchange::BitCoinExchange()
 {
@@ -48,20 +43,21 @@ void	BitCoinExchange::execute(const char *fileName) const
 	if (line != "date | value")
 		throw std::runtime_error("Invalid input file header");
 	std::cout << std::fixed << std::setprecision(2);
+
 	while (getline(file, line))
 	{
 		try
 		{
 			std::string	date, valueString, pipe;
 			std::istringstream	ss(line);
-			if (!(ss >> date))
-				throw std::runtime_error("Bad input => " + line);
-			if (!isValidDate(date)) // not handling date lower than begin of database yet
+			
+			if (!(ss >> date) || !isValidDate(date))
 				throw std::runtime_error("Bad input => " + line);
 			if (!(ss >> pipe) || pipe != "|")
 				throw std::runtime_error("Bad input => " + line);
 			if (!(ss >> valueString))
 				throw std::runtime_error("Bad input => " + line);
+			
 			int value = parseValue(valueString);
 			double	rate = getRate(date);
 			std::cout << date << " => " << value << " = " << value * rate << "\n";

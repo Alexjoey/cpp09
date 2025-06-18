@@ -15,8 +15,11 @@
 #include <map>
 #include <cstdlib>
 #include <string>
-#include <iostream>
+#include <iomanip>
+#include <stdexcept>
+#include <sstream>
 #include <fstream>
+#include <iostream>
 
 class BitCoinExchange
 {

@@ -6,7 +6,7 @@
 /*   By: amylle <alexm@live.be>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 19:06:50 by amylle            #+#    #+#             */
-/*   Updated: 2025/04/25 19:07:53 by amylle           ###   ########.fr       */
+/*   Updated: 2025/06/18 15:00:09 by amylle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		std::cout << "Usage: ./bitcoin [file]" << std::endl;
+		std::cout << "Usage: ./bitcoin [file]\n";
 		return (1);
 	}
 
@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cout << e.what() << '\n';
 	}
 
 	return (0);
