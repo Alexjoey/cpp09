@@ -6,7 +6,7 @@
 /*   By: amylle <alexm@live.be>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 08:51:02 by amylle            #+#    #+#             */
-/*   Updated: 2025/04/26 09:13:06 by amylle           ###   ########.fr       */
+/*   Updated: 2025/06/18 15:07:18 by amylle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	RPN::doAddition()
 		throw std::exception();
 	int b = _nums.top();
 	_nums.pop();
+	
 	_nums.push(a + b);
 }
 
@@ -69,6 +70,7 @@ void	RPN::doSubtraction()
 		throw std::exception();
 	int b = _nums.top();
 	_nums.pop();
+
 	_nums.push(b - a);
 }
 
@@ -82,6 +84,7 @@ void RPN::doMulitplication()
 		throw std::exception();
 	int b = _nums.top();
 	_nums.pop();
+
 	_nums.push(a * b);
 }
 
@@ -98,5 +101,6 @@ void	RPN::doDivision()
 	_nums.pop();
 	if (a == 0)
 		throw std::exception();
+
 	_nums.push(b / a);
 }
